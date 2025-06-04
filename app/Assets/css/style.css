@@ -38,3 +38,7 @@ main {
 #btn-adicionar-tarefa {
     margin-bottom: .5rem;
 }
+
+#tarefas-lista {
+    padding: 10px 0px 25px 0px;
+}
