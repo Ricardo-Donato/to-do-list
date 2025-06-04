@@ -11,7 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //função apenas para exemplificar
     function adicionarNovaTarefa(tarefa) {
-        listaTarefas.innerHTML += `<span>${tarefa}</span><br>`;
+        listaTarefas.innerHTML += `
+            <div class="checkbox-wrapper-13">
+                <input id="${tarefa}" type="checkbox">
+                <label for="${tarefa}">${tarefa}</label>
+            </div>`;
+
         alert(`A tarefa ${tarefa} foi adicionada com sucesso!`);
     }
 })
