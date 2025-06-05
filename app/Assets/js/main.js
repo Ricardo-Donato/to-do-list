@@ -1,40 +1,132 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btnAdicionarTarefa = document.getElementById('btn-adicionar-tarefa');
-    let listaTarefas = document.getElementById('tarefas-lista');
+    const listaTarefasEl = document.getElementById('tarefas-lista');
+    const addTaskForm = document.getElementById('add-task-form');
+    const taskInput = document.getElementById('task-input');
+    const statusIndicator = document.getElementById('status-indicator');
 
-    btnAdicionarTarefa.addEventListener('click', () => {
-        const tarefaTexto = prompt('Digite a nova tarefa:');
-        if (tarefaTexto) {
-            adicionarNovaTarefa(tarefaTexto);
+    const API_URL = 'http://localhost:3000/api/tasks';
+
+    // Função para atualizar o status no rodapé
+    const updateStatus = (state, message) => {
+        statusIndicator.className = '';
+        statusIndicator.classList.add(`status-${state}`);
+        statusIndicator.textContent = message;
+    };
+
+    // Função para renderizar UMA tarefa na tela
+    const renderTask = (task) => {
+        const taskDiv = document.createElement('div');
+        taskDiv.className = 'checkbox-wrapper-13';
+        taskDiv.dataset.id = task.id; // Importante para identificar a tarefa
+
+        const isChecked = task.concluida ? 'checked' : '';
+        
+        taskDiv.innerHTML = `
+            <input id="task-${task.id}" type="checkbox" ${isChecked}>
+            <label for="task-${task.id}">${task.tarefa}</label>
+            <i class="fa-solid fa-trash delete-btn" title="Excluir tarefa"></i>
+        `;
+
+        // Adiciona evento para marcar como concluída
+        const checkbox = taskDiv.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', () => {
+            toggleTaskCompletion(task.id, checkbox.checked);
+        });
+        
+        // Adiciona evento para deletar
+        const deleteBtn = taskDiv.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', () => {
+            if (confirm(`Tem certeza que deseja excluir a tarefa "${task.tarefa}"?`)) {
+                deleteTask(task.id);
+            }
+        });
+
+        listaTarefasEl.appendChild(taskDiv);
+    };
+
+    // 1. Carregar todas as tarefas ao iniciar
+    const fetchTasks = async () => {
+        updateStatus('syncing', 'Carregando tarefas...');
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error('Falha ao buscar tarefas');
+            
+            const tasks = await response.json();
+            listaTarefasEl.innerHTML = ''; // Limpa a lista
+            tasks.forEach(renderTask);
+            updateStatus('synced', 'Tarefas sincronizadas.');
+        } catch (error) {
+            updateStatus('error', 'Erro de conexão. Verifique se o servidor está rodando.');
+            console.error(error);
         }
-    })
+    };
 
-    //funï¿½ï¿½o apenas para exemplificar
-    function adicionarNovaTarefa(tarefa) {
-        listaTarefas.innerHTML += `
-            <div class="checkbox-wrapper-13">
-                <input id="${tarefa}" type="checkbox">
-                <label for="${tarefa}">${tarefa}</label>
-            </div>`;
+    // 2. Adicionar uma nova tarefa
+    addTaskForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const tarefaTexto = taskInput.value.trim();
+        if (!tarefaTexto) return;
 
-        alert(`A tarefa ${tarefa} foi adicionada com sucesso!`);
-    }
+        $('#add-task-modal').modal('hide'); // Fecha o modal com jQuery (já que Bootstrap o usa)
+        taskInput.value = '';
 
-    function mostrarMensagem(mensagem, type) {
-        let elementoMensagem = document.getElementById('message-container');
+        updateStatus('syncing', 'Adicionando tarefa...');
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tarefa: tarefaTexto }),
+            });
+            if (!response.ok) throw new Error('Falha ao adicionar tarefa');
 
-        if (!elementoMensagem) {
-            elementoMensagem = document.createElement('div');
-            elementoMensagem.id = 'message-container';
-            document.body.appendChild(elementoMensagem);
+            const newTask = await response.json();
+            renderTask(newTask); // Adiciona a nova tarefa na lista
+            updateStatus('synced', 'Tarefa adicionada com sucesso!');
+        } catch (error) {
+            updateStatus('error', 'Falha ao salvar a tarefa.');
+            console.error(error);
         }
-        elementoMensagem.innerHTML = mensagem;
-        elementoMensagem.className = `message ${type}`;
-        elementoMensagem.style.display = 'block';
+    });
+    
+    // 3. Marcar/desmarcar tarefa como concluída
+    const toggleTaskCompletion = async (id, isCompleted) => {
+        updateStatus('syncing', 'Atualizando status...');
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ concluida: isCompleted }),
+            });
+            if (!response.ok) throw new Error('Falha ao atualizar');
+            updateStatus('synced', 'Status atualizado!');
+        } catch (error) {
+            updateStatus('error', 'Falha ao atualizar o status.');
+            // Desfaz a alteração visual se der erro
+            const checkbox = document.getElementById(`task-${id}`);
+            if (checkbox) checkbox.checked = !isCompleted;
+        }
+    };
 
-        setTimeout(() => {
-            elementoMensagem.style.display = 'none';
-        }, 5000);
+    // 4. Deletar uma tarefa
+    const deleteTask = async (id) => {
+        updateStatus('syncing', 'Excluindo tarefa...');
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) throw new Error('Falha ao excluir');
 
-    }
-})
+            // Remove o elemento da tela
+            const taskEl = document.querySelector(`[data-id='${id}']`);
+            if (taskEl) taskEl.remove();
+            
+            updateStatus('synced', 'Tarefa excluída!');
+        } catch (error) {
+            updateStatus('error', 'Falha ao excluir a tarefa.');
+        }
+    };
+
+
+    // Inicia tudo
+    fetchTasks();
+});

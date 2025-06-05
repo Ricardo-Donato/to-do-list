@@ -1,1 +1,5 @@
-[{"tarefa": "Academia", "concluida": true}, {"tarefa": "Est\u00e1gio", "concluida": true}, {"tarefa": "Ensino m\u00e9dio", "concluida": true}]
+[
+  { "id": 1, "tarefa": "Academia", "concluida": true },
+  { "id": 2, "tarefa": "Estágio", "concluida": true },
+  { "id": 3, "tarefa": "Ensino médio", "concluida": true }
+]

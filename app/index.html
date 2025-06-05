@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<!-- Seu <head> continua o mesmo -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,7 @@
 <body>
     <div id="message-container"></div>
     <header>
+        <!-- Seu header continua o mesmo -->
         <div class="container">
             <div class="logo">
                 <a href="index.html" class="home">
@@ -33,19 +34,47 @@
             </nav>
         </div>
     </header>
-    <main>
+    <main class="container mt-4"> <!-- Adicionado container e margin-top -->
         <h2>Minha lista de tarefas</h2>
-        <div id="tarefas-lista"></div>
-        <button id="btn-adicionar-tarefa" class="btn btn-success btn-xs" title="Adicionar tarefa">Adicionar tarefa <i
+        <div id="tarefas-lista">
+            <!-- As tarefas serão carregadas aqui -->
+        </div>
+        <!-- Este botão agora abre o modal -->
+        <button id="btn-adicionar-tarefa" class="btn btn-success btn-xs" title="Adicionar tarefa" data-toggle="modal" data-target="#add-task-modal">Adicionar tarefa <i
                 class='fa-solid fa-plus'></i></button>
-        <div class="alert alert-primary" role="alert">
-            <i class="fa-regular fa-thumbs-up"></i> Você pode ver, criar, marcar como concluída, editar, excluir e até solicitar sugestão de checklist feito por IA.
-        </div>
-        <div class="alert alert-success" role="alert">
-            <i class="fa-solid fa-check"></i> Suas tarefas são salvas automaticamente no seu navegador.
-        </div>
+        <!-- Removido os alertas estáticos, pois o status será dinâmico -->
     </main>
-    <footer>
+
+    <!-- Modal para Adicionar Tarefa -->
+    <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Adicionar Nova Tarefa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-task-form">
+                        <div class="form-group">
+                            <label for="task-input">Descrição da tarefa</label>
+                            <input type="text" class="form-control" id="task-input" placeholder="O que precisa ser feito?" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Salvar Tarefa</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="fixed-bottom"> <!-- Rodapé fixo para o status -->
+        <!-- NOSSO INDICADOR DE STATUS DINÂMICO -->
+        <div id="status-indicator"></div>
+
         <script src="Assets/js/main.js"></script>
         <script src="https://kit.fontawesome.com/05f40c3e20.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
