@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!-- Seu <head> continua o mesmo -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,13 +41,14 @@
             <!-- As tarefas serão carregadas aqui -->
         </div>
         <!-- Este botão agora abre o modal -->
-        <button id="btn-adicionar-tarefa" class="btn btn-success btn-xs" title="Adicionar tarefa" data-toggle="modal" data-target="#add-task-modal">Adicionar tarefa <i
-                class='fa-solid fa-plus'></i></button>
+        <button id="btn-adicionar-tarefa" class="btn btn-success btn-xs" title="Adicionar tarefa" data-toggle="modal"
+            data-target="#add-task-modal">Adicionar tarefa <i class='fa-solid fa-plus'></i></button>
         <!-- Removido os alertas estáticos, pois o status será dinâmico -->
     </main>
 
     <!-- Modal para Adicionar Tarefa -->
-    <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,7 +61,8 @@
                     <form id="add-task-form">
                         <div class="form-group">
                             <label for="task-input">Descrição da tarefa</label>
-                            <input type="text" class="form-control" id="task-input" placeholder="O que precisa ser feito?" required>
+                            <input type="text" class="form-control" id="task-input"
+                                placeholder="O que precisa ser feito?" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -70,7 +73,7 @@
             </div>
         </div>
     </div>
-    
+
     <footer class="fixed-bottom"> <!-- Rodapé fixo para o status -->
         <!-- NOSSO INDICADOR DE STATUS DINÂMICO -->
         <div id="status-indicator"></div>

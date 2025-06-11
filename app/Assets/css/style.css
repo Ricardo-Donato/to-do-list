@@ -195,7 +195,7 @@ main {
     color: white;
 }
 
-/* Adições para o indicador de status */
+/* Adiï¿½ï¿½es para o indicador de status */
 footer {
     background-color: #f8f9fa;
     padding: 10px 0;
@@ -232,13 +232,13 @@ footer {
     color: #dc3545;
 }
 
-/* Ajuste para o main não ficar atrás do rodapé fixo */
+/* Ajuste para o main nï¿½o ficar atrï¿½s do rodapï¿½ fixo */
 body {
     margin-bottom: 60px;
-    /* Altura do rodapé */
+    /* Altura do rodapï¿½ */
 }
 
-/* Estilo para botão de deletar */
+/* Estilo para botï¿½o de deletar */
 .delete-btn {
     color: #dc3545;
     cursor: pointer;
