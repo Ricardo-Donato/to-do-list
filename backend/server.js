@@ -7,6 +7,7 @@ const PORT = 3000;
 
 app.use(cors()); // Permite que o frontend acesse o backend
 app.use(express.json()); // Permite que o servidor entenda JSON
+app.use(express.static(path.join(__dirname, '../public')));
 
 const TASKS_PATH = path.join(__dirname, 'tarefas.json');
 
