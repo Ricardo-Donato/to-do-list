@@ -251,3 +251,7 @@ body {
 .checkbox-wrapper-13:hover .delete-btn {
     opacity: 1;
 }
+
+.modal-footer {
+    padding: 10px 0 0 0 !important;
+}

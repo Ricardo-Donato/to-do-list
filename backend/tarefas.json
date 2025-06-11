@@ -1,17 +1,22 @@
 [
   {
-    "id": 1,
+    "id": 5,
     "tarefa": "Academia",
-    "concluida": true
+    "concluida": false
   },
   {
-    "id": 2,
-    "tarefa": "Estágio",
-    "concluida": true
+    "id": 6,
+    "tarefa": "Desenvolver página \"Sobre\" explicando o ToDoList",
+    "concluida": false
   },
   {
-    "id": 3,
-    "tarefa": "Ensino médio",
-    "concluida": true
+    "id": 7,
+    "tarefa": "Desenvolver página \"Contato\" do ToDoList",
+    "concluida": false
+  },
+  {
+    "id": 8,
+    "tarefa": "Criar modal para editar e deletar a tarefa que nem o modal de adicionar tarefa",
+    "concluida": false
   }
 ]
