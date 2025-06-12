@@ -16,13 +16,13 @@
   },
   {
     "id": 8,
-    "tarefa": "Criar modal para editar e deletar a tarefa que nem o modal de adicionar tarefa",
+    "tarefa": "Criar modal para deletar a tarefa que nem o modal de adicionar tarefa",
     "concluida": false
   },
   {
     "id": 9,
     "tarefa": "Ajustar funcionamento dos emojis no rodapé, pois está aparecendo ?? no lugar",
-    "concluida": false
+    "concluida": true
   },
   {
     "id": 10,
