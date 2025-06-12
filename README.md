@@ -108,15 +108,6 @@ A API RESTful segue os seguintes endpoints:
 
 ---
 
-## 🔮 Próximos Passos
-
-- [ ] Implementar um sistema de autenticação de usuários (JWT).
-- [ ] Substituir o `tarefas.json` por um banco de dados real (MongoDB ou PostgreSQL).
-- [ ] Adicionar testes unitários e de integração (Jest, Supertest).
-- [ ] Realizar o deploy da aplicação em uma plataforma como Heroku ou Vercel.
-
----
-
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
