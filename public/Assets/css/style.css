@@ -209,7 +209,7 @@ footer {
 }
 
 .status-synced::before {
-    content: '?? ';
+    content: '✅ ';
 }
 
 .status-synced {
@@ -217,7 +217,7 @@ footer {
 }
 
 .status-syncing::before {
-    content: '?? ';
+    content: '🔃 ';
 }
 
 .status-syncing {
@@ -225,7 +225,7 @@ footer {
 }
 
 .status-error::before {
-    content: '?? ';
+    content: '❌ ';
 }
 
 .status-error {

@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_URL = 'http://localhost:3000/api/tasks';
 
-    // Fun��o para atualizar o status no rodap�
+    // Função para atualizar o status no rodapé
     const updateStatus = (state, message) => {
         statusIndicator.className = '';
         statusIndicator.classList.add(`status-${state}`);
         statusIndicator.textContent = message;
     };
 
-    // Fun��o para renderizar UMA tarefa na tela
+    // Função para renderizar UMA tarefa na tela
     const renderTask = (task) => {
         const taskDiv = document.createElement('div');
         taskDiv.className = 'checkbox-wrapper-13';
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tasks.forEach(renderTask);
             updateStatus('synced', 'Tarefas sincronizadas.');
         } catch (error) {
-            updateStatus('error', 'Erro de conex�o. Verifique se o servidor est� rodando.');
+            updateStatus('error', 'Erro de conexão. Verifique se o servidor está rodando.');
             console.error(error);
         }
     };
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tarefaTexto = taskInput.value.trim();
         if (!tarefaTexto) return;
 
-        $('#add-task-modal').modal('hide'); // Fecha o modal com jQuery (j� que Bootstrap o usa)
+        $('#add-task-modal').modal('hide'); // Fecha o modal com jQuery (já que Bootstrap o usa)
         taskInput.value = '';
 
         updateStatus('syncing', 'Adicionando tarefa...');
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Marcar/desmarcar tarefa como conclu�da
+    // 3. Marcar/desmarcar tarefa como concluída
     const toggleTaskCompletion = async (id, isCompleted) => {
         updateStatus('syncing', 'Atualizando status...');
         try {
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStatus('synced', 'Status atualizado!');
         } catch (error) {
             updateStatus('error', 'Falha ao atualizar o status.');
-            // Desfaz a altera��o visual se der erro
+            // Desfaz a alteração visual se der erro
             const checkbox = document.getElementById(`task-${id}`);
             if (checkbox) checkbox.checked = !isCompleted;
         }
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const taskEl = document.querySelector(`[data-id='${id}']`);
             if (taskEl) taskEl.remove();
 
-            updateStatus('synced', 'Tarefa exclu�da!');
+            updateStatus('synced', 'Tarefa excluída!');
         } catch (error) {
             updateStatus('error', 'Falha ao excluir a tarefa.');
         }
