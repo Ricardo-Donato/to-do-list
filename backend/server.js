@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, '../public'))); //serve arquivos est
 const TASKS_PATH = path.join(__dirname, 'tarefas.json');
 
 // --- Funções Auxiliares ---
-const GETTarefas = async () => {
+const readTasks = async () => {
     try {
         const data = await fs.readFile(TASKS_PATH, 'utf-8');
         return JSON.parse(data);
@@ -33,7 +33,7 @@ const writeTasks = async (tasks) => {
 
 // GET /api/tasks -> Retorna todas as tarefas
 app.get('/api/tasks', async (req, res) => {
-    const tasks = await GETTarefas();
+    const tasks = await readTasks();
     res.json(tasks);
 });
 
@@ -47,7 +47,7 @@ app.post('/api/tasks', async (req, res) => {
     // Simulando atraso de rede para ver o status "Sincronizando"
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const tasks = await GETTarefas();
+    const tasks = await readTasks();
     const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id || 0)) + 1 : 1;
     const newTask = { id: newId, tarefa: tarefa, concluida: false };
 
@@ -65,7 +65,7 @@ app.put('/api/tasks/:id', async (req, res) => {
     // Simulando um pequeno atraso para vermos o status de "sincronizando"
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    const tasks = await GETTarefas();
+    const tasks = await readTasks();
     const taskIndex = tasks.findIndex(t => t.id === taskId);
 
     if (taskIndex === -1) {
@@ -92,7 +92,7 @@ app.put('/api/tasks/:id', async (req, res) => {
 app.delete('/api/tasks/:id', async (req, res) => {
     const taskId = parseInt(req.params.id, 10);
 
-    let tasks = await GETTarefas();
+    let tasks = await readTasks();
     const updatedTasks = tasks.filter(t => t.id !== taskId);
 
     if (tasks.length === updatedTasks.length) {
