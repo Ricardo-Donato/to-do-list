@@ -1,12 +1,12 @@
 [
   {
     "id": 5,
-    "tarefa": "Academia",
+    "tarefa": "Academia - Treino de Costas e Tríceps",
     "concluida": false
   },
   {
     "id": 6,
-    "tarefa": "Desenvolver página \"Sobre\" explicando o ToDoList",
+    "tarefa": "Desenvolver página \"Sobre\" para explicar o projeto ToDoList",
     "concluida": false
   },
   {
@@ -17,6 +17,11 @@
   {
     "id": 8,
     "tarefa": "Criar modal para editar e deletar a tarefa que nem o modal de adicionar tarefa",
+    "concluida": false
+  },
+  {
+    "id": 9,
+    "tarefa": "Ajustar funcionamento dos emojis no rodapé, pois está aparecendo ?? no lugar",
     "concluida": false
   }
 ]

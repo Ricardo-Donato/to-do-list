@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addTaskForm = document.getElementById('add-task-form');
     const taskInput = document.getElementById('task-input');
     const statusIndicator = document.getElementById('status-indicator');
+    const editTaskForm = document.getElementById('edit-task-form');
+    const editTaskInput = document.getElementById('edit-task-input');
+    const editTaskIdInput = document.getElementById('edit-task-id');
 
     const API_URL = 'http://localhost:3000/api/tasks';
 
@@ -22,15 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const isChecked = task.concluida ? 'checked' : '';
 
         taskDiv.innerHTML = `
-            <input id="task-${task.id}" type="checkbox" ${isChecked}>
-            <label for="task-${task.id}">${task.tarefa}</label>
-            <i class="fa-solid fa-trash delete-btn" title="Excluir tarefa"></i>
+        <input id="task-${task.id}" type="checkbox" ${task.concluida ? 'checked' : ''}>
+        <label for="task-${task.id}">${task.tarefa}</label>
+        <i class="fa-solid fa-pencil edit-btn" title="Editar tarefa"></i> 
+        <i class="fa-solid fa-trash delete-btn" title="Excluir tarefa"></i>
         `;
 
-        // Adiciona evento para marcar como conclu�da
+        // Adiciona evento para marcar como concluída
         const checkbox = taskDiv.querySelector('input[type="checkbox"]');
         checkbox.addEventListener('change', () => {
             toggleTaskCompletion(task.id, checkbox.checked);
+        });
+
+        const editBtn = taskDiv.querySelector('.edit-btn');
+        editBtn.addEventListener('click', () => {
+            // Pega os dados da tarefa atual
+            const currentText = taskDiv.querySelector('label').textContent;
+            const taskId = task.id;
+
+            // Preenche o modal de edição com os dados
+            editTaskInput.value = currentText;
+            editTaskIdInput.value = taskId;
+
+            // Abre o modal de edição
+            $('#edit-task-modal').modal('show');
         });
 
         // Adiciona evento para deletar
@@ -126,6 +144,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const updateTaskText = async (id, newText) => {
+        updateStatus('syncing', 'Salvando alterações...');
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tarefa: newText }), // Enviamos apenas o campo 'tarefa'
+            });
+
+            if (!response.ok) throw new Error('Falha ao salvar');
+
+            const updatedTask = await response.json();
+
+            // Atualiza o texto na tela
+            const taskLabel = document.querySelector(`[data-id='${id}'] label`);
+            if (taskLabel) {
+                taskLabel.textContent = updatedTask.tarefa;
+            }
+
+            updateStatus('synced', 'Tarefa atualizada!');
+
+        } catch (error) {
+            updateStatus('error', 'Não foi possível salvar a alteração.');
+        }
+    };
+
+    // ---> NOVO: Listener para o formulário de edição <---
+    editTaskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newText = editTaskInput.value.trim();
+        const taskId = editTaskIdInput.value;
+
+        if (newText && taskId) {
+            updateTaskText(taskId, newText);
+            $('#edit-task-modal').modal('hide'); // Fecha o modal
+        }
+    });
 
     // Inicia tudo
     fetchTasks();

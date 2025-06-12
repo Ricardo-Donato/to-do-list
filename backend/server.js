@@ -59,7 +59,10 @@ app.post('/api/tasks', async (req, res) => {
 // PUT /api/tasks/:id -> Atualiza uma tarefa (ex: marcar como concluída)
 app.put('/api/tasks/:id', async (req, res) => {
     const taskId = parseInt(req.params.id, 10);
-    const { concluida } = req.body;
+    const { tarefa, concluida } = req.body; // Pegamos tanto 'tarefa' quanto 'concluida' do corpo da requisição
+
+    // Simulando um pequeno atraso para vermos o status de "sincronizando"
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     const tasks = await readTasks();
     const taskIndex = tasks.findIndex(t => t.id === taskId);
@@ -68,9 +71,19 @@ app.put('/api/tasks/:id', async (req, res) => {
         return res.status(404).json({ message: 'Tarefa não encontrada.' });
     }
 
-    tasks[taskIndex].concluida = concluida;
+    // Atualiza o texto da tarefa APENAS se ele foi enviado na requisição
+    if (tarefa !== undefined) {
+        tasks[taskIndex].tarefa = tarefa;
+    }
+
+    // Atualiza o status de conclusão APENAS se ele foi enviado
+    if (concluida !== undefined) {
+        tasks[taskIndex].concluida = concluida;
+    }
+
     await writeTasks(tasks);
 
+    // Retorna a tarefa completamente atualizada
     res.json(tasks[taskIndex]);
 });
 
