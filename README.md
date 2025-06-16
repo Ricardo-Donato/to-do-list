@@ -39,7 +39,7 @@ Siga os passos abaixo para executar o projeto em seu ambiente local.
 ### Pré-requisitos
 
 - [Node.js](https://nodejs.org/en/) (versão 14 ou superior)
-- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/)
 
 ### Passos
 
