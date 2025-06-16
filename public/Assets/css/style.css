@@ -232,13 +232,10 @@ footer {
     color: #dc3545;
 }
 
-/* Ajuste para o main n�o ficar atr�s do rodap� fixo */
 body {
     margin-bottom: 60px;
-    /* Altura do rodap� */
 }
 
-/* Estilo para bot�o de deletar */
 .delete-btn {
     color: #dc3545;
     cursor: pointer;
@@ -258,7 +255,6 @@ body {
 
 .edit-btn {
     color: #007bff;
-    /* Azul do Bootstrap */
     cursor: pointer;
     margin-left: 15px;
     font-size: 16px;
@@ -302,7 +298,6 @@ footer {
 
 .footer-logo p {
     color: #b3b3b3;
-    /* Cinza claro para o slogan */
 }
 
 .footer-links h3,
@@ -316,7 +311,6 @@ footer {
     list-style: none;
     padding: 0;
     margin: 0 !important;
-    /* Sobrescreve margens do Bootstrap se necess�rio */
 }
 
 .footer-links ul li {
