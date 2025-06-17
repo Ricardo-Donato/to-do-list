@@ -197,13 +197,13 @@ main {
 
 footer {
     background-color: #f8f9fa;
-    padding: 10px 0;
+    padding: 30px 0;
     text-align: center;
     border-top: 1px solid #dee2e6;
 }
 
 #status-indicator {
-    padding-bottom: 30px;
+    text-align: center;
     font-weight: 500;
     transition: color 0.3s ease-in-out;
 }
