@@ -1,15 +1,5 @@
 [
   {
-    "id": 6,
-    "tarefa": "Desenvolver página \"Sobre\" para explicar o projeto ToDoList",
-    "concluida": true
-  },
-  {
-    "id": 7,
-    "tarefa": "Desenvolver página \"Contato\" do ToDoList",
-    "concluida": true
-  },
-  {
     "id": 8,
     "tarefa": "Criar modal para deletar a tarefa que nem o modal de adicionar tarefa",
     "concluida": false

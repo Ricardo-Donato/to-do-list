@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const editTaskForm = document.getElementById('edit-task-form');
     const editTaskInput = document.getElementById('edit-task-input');
     const editTaskIdInput = document.getElementById('edit-task-id');
+    const deleteTaskForm = document.getElementById('remove-task-form');
+    const deleteTaskIdInput = document.getElementById('remove-task-id');
 
     const API_URL = 'http://localhost:3000/api/tasks';
 
@@ -25,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const isChecked = task.concluida ? 'checked' : '';
 
         taskDiv.innerHTML = `
-        <input id="task-${task.id}" type="checkbox" ${task.concluida ? 'checked' : ''}>
-        <label for="task-${task.id}">${task.tarefa}</label>
-        <i class="fa-solid fa-pencil edit-btn" title="Editar tarefa"></i> 
-        <i class="fa-solid fa-trash delete-btn" title="Excluir tarefa"></i>
+            <input id="task-${task.id}" type="checkbox" ${task.concluida ? 'checked' : ''}>
+            <label for="task-${task.id}">${task.tarefa}</label>
+            <i class="fa-solid fa-pencil edit-btn" title="Editar tarefa"></i> 
+            <i class="fa-solid fa-trash delete-btn" title="Excluir tarefa"></i>
         `;
 
         // Adiciona evento para marcar como concluída
@@ -51,12 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#edit-task-modal').modal('show');
         });
 
-        // Adiciona evento para deletar
         const deleteBtn = taskDiv.querySelector('.delete-btn');
         deleteBtn.addEventListener('click', () => {
-            if (confirm(`Tem certeza que deseja excluir a tarefa "${task.tarefa}"?`)) {
-                deleteTask(task.id);
+            const currentText = taskDiv.querySelector('label').textContent;
+            const taskId = task.id;
+
+            // Mostra mensagem de confirmação no modal
+            const label = document.getElementById('remove-task-label');
+            if (label) {
+                label.textContent = `Deseja realmente excluir a tarefa "${currentText}"?`;
             }
+            // Passa o id da tarefa para o campo hidden
+            deleteTaskIdInput.value = taskId;
+
+            $('#remove-task-modal').modal('show');
         });
 
         listaTarefasEl.appendChild(taskDiv);
@@ -179,6 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newText && taskId) {
             updateTaskText(taskId, newText);
             $('#edit-task-modal').modal('hide'); // Fecha o modal
+        }
+    });
+
+    // Listener para o formulário de remoção
+    deleteTaskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const taskId = deleteTaskIdInput.value;
+        if (taskId) {
+            deleteTask(taskId);
+            $('#remove-task-modal').modal('hide');
         }
     });
 
