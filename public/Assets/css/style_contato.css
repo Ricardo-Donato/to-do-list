@@ -11,7 +11,7 @@
 }
 
 body {
-    background-color: var(--light-gray, #f5f5f5);
+    background-color: var(--light-gray);
 }
 
 main {
@@ -24,7 +24,7 @@ main {
     max-width: 700px;
     margin: 0 auto;
     padding: 40px;
-    box-shadow: var(--box-shadow, 0 4px 6px rgba(0, 0, 0, 0.1));
+    box-shadow: var(--box-shadow);
 }
 
 .contact-header {
@@ -33,26 +33,26 @@ main {
 }
 
 .contact-header h2 {
-    color: var(--primary-color, #0066cc);
+    color: var(--primary-color);
     margin-bottom: 8px;
 }
 
 .contact-header p {
-    color: var(--dark-gray, #666666);
+    color: var(--dark-gray);
     font-size: 1.1rem;
 }
 
 .contact-info {
     text-align: center;
     margin-bottom: 32px;
-    border-top: 1px solid var(--medium-gray, #e0e0e0);
-    border-bottom: 1px solid var(--medium-gray, #e0e0e0);
+    border-top: 1px solid var(--medium-gray);
+    border-bottom: 1px solid var(--medium-gray);
     padding: 24px 0;
 }
 
 .contact-info p {
     font-size: 1.1rem;
-    color: var(--text-color, #333);
+    color: var(--text-color);
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -66,7 +66,7 @@ main {
 }
 
 .contact-info a:hover {
-    color: var(--primary-color, #0066cc);
+    color: var(--primary-color);
 }
 
 .social-media-contato {
@@ -78,12 +78,12 @@ main {
 
 .social-media-contato a {
     font-size: 1.8rem;
-    color: var(--dark-gray, #666666);
+    color: var(--dark-gray);
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-media-contato a:hover {
-    color: var(--primary-color, #0066cc);
+    color: var(--primary-color);
     transform: scale(1.1);
 }
 
@@ -108,7 +108,7 @@ main {
     width: 100%;
     padding: 12px;
     border-radius: 6px;
-    border: 1px solid var(--medium-gray, #e0e0e0);
+    border: 1px solid var(--medium-gray);
     margin-bottom: 20px;
     font-size: 1rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -117,13 +117,13 @@ main {
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: var(--primary-color, #0066cc);
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
 }
 
 .contact-form button {
-    background: var(--primary-color, #0066cc);
-    color: var(--white, #ffffff);
+    background: var(--primary-color);
+    color: var(--white);
     border: none;
     padding: 14px 28px;
     border-radius: 6px;
