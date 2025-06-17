@@ -45,12 +45,12 @@ Siga os passos abaixo para executar o projeto em seu ambiente local.
 
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/seu-usuario/seu-repositorio.git
+    git clone https://github.com/Ricardo-Donato/to-do-list.git
     ```
 
 2.  **Navegue até o diretório do projeto:**
     ```bash
-    cd seu-repositorio
+    cd to-do-list
     ```
 
 3.  **Instale as dependências do backend:**
@@ -75,7 +75,7 @@ Siga os passos abaixo para executar o projeto em seu ambiente local.
 O projeto é organizado com uma clara separação entre o código do backend e os arquivos do frontend.
 
 ```
-seu-repositorio/
+to-do-list/
 ├── 📂 backend/
 │   ├── server.js         # Lógica do servidor e da API
 │   └── tarefas.json      # Arquivo de persistência de dados
