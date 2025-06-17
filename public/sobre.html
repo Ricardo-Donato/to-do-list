@@ -33,65 +33,71 @@
             </nav>
         </div>
     </header>
-    <main class="container mt-4">
-        <h2>Minha lista de tarefas</h2>
-        <div id="tarefas-lista">
+    <main class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <!-- Ex: <img src="Assets/Images/calendar.png" alt="Logo ToDoList" class="mb-4" style="width: 100px;"> -->
+                <h1 class="display-4">Sobre o ToDoList</h1>
+                <p class="lead text-muted">Sua ferramenta pessoal para transformar o caos em organização.</p>
+                <hr class="my-4">
+            </div>
         </div>
-        <button id="btn-adicionar-tarefa" class="btn btn-success btn-xs" title="Adicionar tarefa" data-toggle="modal"
-            data-target="#add-task-modal">Adicionar tarefa <i class='fa-solid fa-plus'></i></button>
+
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h4>Nossa Filosofia: Simplicidade é Poder</h4>
+                <p>
+                    O ToDoList nasceu de uma ideia simples: criar uma lista de tarefas que fizesse o básico de forma excepcional. Em um mundo digital cheio de aplicativos complexos, queríamos voltar à essência. Sem distrações, sem configurações complicadas. Apenas um espaço limpo e direto para você e seus objetivos.
+                </p>
+                <p>
+                    Este projeto foi desenvolvido não apenas como uma ferramenta útil, mas também como um exercício prático para demonstrar como tecnologias modernas podem criar experiências rápidas e confiáveis.
+                </p>
+
+                <h4 class="mt-5">Recursos Pensados para Você</h4>
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-bolt text-primary mr-2"></i>Interface Rápida</h5>
+                                <p class="card-text">Suas ações são refletidas na tela instantaneamente. Adicione, edite ou exclua tarefas sem atrasos, graças a uma interface otimista que não te deixa esperando.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-cloud-arrow-up text-success mr-2"></i>Sincronização em Tempo Real</h5>
+                                <p class="card-text">Fique tranquilo sabendo que suas tarefas estão seguras. Um indicador no rodapé mostra o status da conexão, garantindo que tudo seja salvo automaticamente em nosso servidor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-pen-to-square text-info mr-2"></i>Gerenciamento Completo</h5>
+                                <p class="card-text">Você tem controle total. Crie novas tarefas, edite as existentes para ajustar detalhes e remova o que já foi concluído para manter sua lista sempre limpa e focada.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fa-solid fa-code text-secondary mr-2"></i>Tecnologia Aberta</h5>
+                                <p class="card-text">Para os entusiastas, este projeto é open-source! Construído com Node.js e Express no backend, e JavaScript puro com Bootstrap no frontend. Sinta-se à vontade para explorar o código no GitHub.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-5">
+
+                <div class="text-center">
+                    <p>Obrigado por usar o ToDoList. Esperamos que ele te ajude a conquistar seus dias!</p>
+                    <a href="index.html" class="btn btn-primary">Voltar para minha lista</a>
+                </div>
+            </div>
+        </div>
     </main>
-    <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Adicionar Nova Tarefa</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="add-task-form">
-                        <div class="form-group">
-                            <label for="task-input">Descrição da tarefa</label>
-                            <input type="text" class="form-control" id="task-input"
-                                placeholder="O que precisa ser feito?" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="edit-task-modal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Tarefa</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="edit-task-form">
-                        <input type="hidden" id="edit-task-id">
-                        <div class="form-group">
-                            <label for="edit-task-input">Nova descrição da tarefa</label>
-                            <input type="text" class="form-control" id="edit-task-input" required>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <footer>
         <div id="status-indicator"></div>
         <div class="container">
@@ -126,7 +132,6 @@
                 <p>Projeto desenvolvido por Pedro Ricardo Donato da Silva</p>
             </div>
         </div>
-        <script src="Assets/js/main.js"></script>
         <script src="https://kit.fontawesome.com/05f40c3e20.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
