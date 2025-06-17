@@ -2,12 +2,12 @@
   {
     "id": 6,
     "tarefa": "Desenvolver página \"Sobre\" para explicar o projeto ToDoList",
-    "concluida": false
+    "concluida": true
   },
   {
     "id": 7,
     "tarefa": "Desenvolver página \"Contato\" do ToDoList",
-    "concluida": false
+    "concluida": true
   },
   {
     "id": 8,
@@ -16,7 +16,22 @@
   },
   {
     "id": 10,
-    "tarefa": "Estudar uso de sweetalert2 no projeto ToDoList",
+    "tarefa": "Estudar uso de sweetalert2 para aplicar no projeto ToDoList",
+    "concluida": false
+  },
+  {
+    "id": 11,
+    "tarefa": "Conversar com o professor acerca da implementação de uma LLM",
+    "concluida": false
+  },
+  {
+    "id": 12,
+    "tarefa": "Remover comentários desnecessários do código",
+    "concluida": false
+  },
+  {
+    "id": 13,
+    "tarefa": "Adicionar formspree para formulário da página contato",
     "concluida": false
   }
 ]
