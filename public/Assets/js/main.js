@@ -11,18 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_URL = 'http://localhost:3000/api/tasks';
 
-    // Função para atualizar o status no rodapé
     const updateStatus = (state, message) => {
         statusIndicator.className = '';
         statusIndicator.classList.add(`status-${state}`);
         statusIndicator.textContent = message;
     };
 
-    // Função para renderizar UMA tarefa na tela
     const renderTask = (task) => {
         const taskDiv = document.createElement('div');
         taskDiv.className = 'checkbox-wrapper-13';
-        taskDiv.dataset.id = task.id; // Importante para identificar a tarefa
+        taskDiv.dataset.id = task.id;
 
         const isChecked = task.concluida ? 'checked' : '';
 
@@ -33,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <i class="fa-solid fa-trash delete-btn" title="Excluir tarefa"></i>
         `;
 
-        // Adiciona evento para marcar como concluída
         const checkbox = taskDiv.querySelector('input[type="checkbox"]');
         checkbox.addEventListener('change', () => {
             toggleTaskCompletion(task.id, checkbox.checked);
@@ -41,15 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const editBtn = taskDiv.querySelector('.edit-btn');
         editBtn.addEventListener('click', () => {
-            // Pega os dados da tarefa atual
             const currentText = taskDiv.querySelector('label').textContent;
             const taskId = task.id;
 
-            // Preenche o modal de edição com os dados
             editTaskInput.value = currentText;
             editTaskIdInput.value = taskId;
 
-            // Abre o modal de edição
             $('#edit-task-modal').modal('show');
         });
 
@@ -58,12 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentText = taskDiv.querySelector('label').textContent;
             const taskId = task.id;
 
-            // Mostra mensagem de confirmação no modal
             const label = document.getElementById('remove-task-label');
             if (label) {
                 label.textContent = `Deseja realmente excluir a tarefa "${currentText}"?`;
             }
-            // Passa o id da tarefa para o campo hidden
             deleteTaskIdInput.value = taskId;
 
             $('#remove-task-modal').modal('show');
@@ -72,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         listaTarefasEl.appendChild(taskDiv);
     };
 
-    // 1. Carregar todas as tarefas ao iniciar
     const fetchTasks = async () => {
         updateStatus('syncing', 'Carregando tarefas...');
         try {
@@ -80,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Falha ao buscar tarefas');
 
             const tasks = await response.json();
-            listaTarefasEl.innerHTML = ''; // Limpa a lista
+            listaTarefasEl.innerHTML = '';
             tasks.forEach(renderTask);
             updateStatus('synced', 'Tarefas sincronizadas.');
         } catch (error) {
@@ -89,13 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 2. Adicionar uma nova tarefa
     addTaskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const tarefaTexto = taskInput.value.trim();
         if (!tarefaTexto) return;
 
-        $('#add-task-modal').modal('hide'); // Fecha o modal com jQuery (já que Bootstrap o usa)
+        $('#add-task-modal').modal('hide');
         taskInput.value = '';
 
         updateStatus('syncing', 'Adicionando tarefa...');
@@ -108,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Falha ao adicionar tarefa');
 
             const newTask = await response.json();
-            renderTask(newTask); // Adiciona a nova tarefa na lista
+            renderTask(newTask);
             updateStatus('synced', 'Tarefa adicionada com sucesso!');
         } catch (error) {
             updateStatus('error', 'Falha ao salvar a tarefa.');
@@ -116,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Marcar/desmarcar tarefa como concluída
     const toggleTaskCompletion = async (id, isCompleted) => {
         updateStatus('syncing', 'Atualizando status...');
         try {
@@ -129,13 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStatus('synced', 'Status atualizado!');
         } catch (error) {
             updateStatus('error', 'Falha ao atualizar o status.');
-            // Desfaz a alteração visual se der erro
             const checkbox = document.getElementById(`task-${id}`);
             if (checkbox) checkbox.checked = !isCompleted;
         }
     };
 
-    // 4. Deletar uma tarefa
     const deleteTask = async (id) => {
         updateStatus('syncing', 'Excluindo tarefa...');
         try {
@@ -144,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Falha ao excluir');
 
-            // Remove o elemento da tela
             const taskEl = document.querySelector(`[data-id='${id}']`);
             if (taskEl) taskEl.remove();
 
@@ -160,14 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_URL}/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tarefa: newText }), // Enviamos apenas o campo 'tarefa'
+                body: JSON.stringify({ tarefa: newText }),
             });
 
             if (!response.ok) throw new Error('Falha ao salvar');
 
             const updatedTask = await response.json();
 
-            // Atualiza o texto na tela
             const taskLabel = document.querySelector(`[data-id='${id}'] label`);
             if (taskLabel) {
                 taskLabel.textContent = updatedTask.tarefa;
@@ -180,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // ---> NOVO: Listener para o formulário de edição <---
     editTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const newText = editTaskInput.value.trim();
@@ -188,11 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (newText && taskId) {
             updateTaskText(taskId, newText);
-            $('#edit-task-modal').modal('hide'); // Fecha o modal
+            $('#edit-task-modal').modal('hide');
         }
     });
 
-    // Listener para o formulário de remoção
     deleteTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const taskId = deleteTaskIdInput.value;
@@ -202,6 +185,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Inicia tudo
     fetchTasks();
 });
