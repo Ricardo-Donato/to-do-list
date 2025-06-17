@@ -53,7 +53,7 @@ main {
 }
 
 #btn-adicionar-tarefa {
-    margin-bottom: 2.5rem;
+    margin: 4px 0 10px 0;
 }
 
 #tarefas-lista {
