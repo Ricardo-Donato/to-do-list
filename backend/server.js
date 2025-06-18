@@ -12,6 +12,9 @@ app.use(express.static(path.join(__dirname, '../public'))); //serve arquivos est
 // Define o caminho para o arquivo de tarefas
 const TASKS_PATH = path.join(__dirname, 'tarefas.json');
 
+// Caminho para o arquivo de mensagens de contato
+const MESSAGES_PATH = path.join(__dirname, 'mensagens.json');
+
 // --- Funções Auxiliares ---
 const readTasks = async () => {
     try {
@@ -28,6 +31,19 @@ const writeTasks = async (tasks) => {
     await fs.writeFile(TASKS_PATH, JSON.stringify(tasks, null, 2));
 };
 
+const readMessages = async () => {
+    try {
+        const data = await fs.readFile(MESSAGES_PATH, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        if (error.code === 'ENOENT') return [];
+        throw error;
+    }
+};
+
+const writeMessages = async (messages) => {
+    await fs.writeFile(MESSAGES_PATH, JSON.stringify(messages, null, 2));
+};
 
 // --- Rotas da API ---
 
@@ -103,6 +119,27 @@ app.delete('/api/tasks/:id', async (req, res) => {
     res.status(204).send(); // 204 No Content -> Sucesso, sem corpo de resposta
 });
 
+app.post('/api/contact', async (req, res) => {
+    const { name, email, message } = req.body;
+    if (!name || !email || !message) {
+        return res.status(400).json({ success: false, error: 'Todos os campos são obrigatórios.' });
+    }
+    try {
+        const messages = await readMessages();
+        const newMessage = {
+            id: messages.length > 0 ? Math.max(...messages.map(m => m.id || 0)) + 1 : 1,
+            name,
+            email,
+            message,
+            date: new Date().toISOString()
+        };
+        messages.push(newMessage);
+        await writeMessages(messages);
+        res.status(201).json({ success: true });
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Erro ao salvar mensagem.' });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

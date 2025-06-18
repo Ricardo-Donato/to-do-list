@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Teste",
+    "email": "teste@teste.com",
+    "message": "Teste",
+    "date": "2025-06-18T20:25:13.729Z"
+  },
+  {
+    "id": 2,
+    "name": "Teste",
+    "email": "teste@teste.com",
+    "message": "Tewsdasd",
+    "date": "2025-06-18T20:26:38.346Z"
+  }
+]
