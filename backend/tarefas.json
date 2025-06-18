@@ -1,10 +1,5 @@
 [
   {
-    "id": 8,
-    "tarefa": "Criar modal para deletar a tarefa que nem o modal de adicionar tarefa",
-    "concluida": false
-  },
-  {
     "id": 10,
     "tarefa": "Estudar uso de sweetalert2 para aplicar no projeto ToDoList",
     "concluida": false
@@ -12,16 +7,6 @@
   {
     "id": 11,
     "tarefa": "Conversar com o professor acerca da implementação de uma LLM",
-    "concluida": false
-  },
-  {
-    "id": 12,
-    "tarefa": "Remover comentários desnecessários do código",
-    "concluida": false
-  },
-  {
-    "id": 13,
-    "tarefa": "Adicionar formspree para formulário da página contato",
     "concluida": false
   }
 ]
