@@ -1,24 +1,24 @@
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs/promises'); // Usamos a versão de 'promises' do fs
-const path = require('path');
+import express, { json, static as expressStatic } from 'express';
+import cors from 'cors';
+import { readFile, writeFile } from 'fs/promises'; // Usamos a versão de 'promises' do fs
+import { join } from 'path';
 const app = express();
 const PORT = 3000;
 
 app.use(cors()); // Permite que o frontend acesse o backend
-app.use(express.json()); // Permite que o servidor entenda JSON
-app.use(express.static(path.join(__dirname, '../public'))); //serve arquivos estáticos do diretório 'public'
+app.use(json()); // Permite que o servidor entenda JSON
+app.use(expressStatic(join(__dirname, '../public'))); //serve arquivos estáticos do diretório 'public'
 
 // Define o caminho para o arquivo de tarefas
-const TASKS_PATH = path.join(__dirname, 'tarefas.json');
+const TASKS_PATH = join(__dirname, 'tarefas.json');
 
 // Caminho para o arquivo de mensagens de contato
-const MESSAGES_PATH = path.join(__dirname, 'mensagens.json');
+const MESSAGES_PATH = join(__dirname, 'mensagens.json');
 
 // --- Funções Auxiliares ---
 const readTasks = async () => {
     try {
-        const data = await fs.readFile(TASKS_PATH, 'utf-8');
+        const data = await readFile(TASKS_PATH, 'utf-8');
         return JSON.parse(data);
     } catch (error) {
         // Se o arquivo não existir, retorna um array vazio
@@ -28,12 +28,12 @@ const readTasks = async () => {
 };
 
 const writeTasks = async (tasks) => {
-    await fs.writeFile(TASKS_PATH, JSON.stringify(tasks, null, 2));
+    await writeFile(TASKS_PATH, JSON.stringify(tasks, null, 2));
 };
 
 const readMessages = async () => {
     try {
-        const data = await fs.readFile(MESSAGES_PATH, 'utf-8');
+        const data = await readFile(MESSAGES_PATH, 'utf-8');
         return JSON.parse(data);
     } catch (error) {
         if (error.code === 'ENOENT') return [];
@@ -42,7 +42,7 @@ const readMessages = async () => {
 };
 
 const writeMessages = async (messages) => {
-    await fs.writeFile(MESSAGES_PATH, JSON.stringify(messages, null, 2));
+    await writeFile(MESSAGES_PATH, JSON.stringify(messages, null, 2));
 };
 
 // --- Rotas da API ---

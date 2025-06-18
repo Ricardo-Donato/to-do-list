@@ -188,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetchTasks();
     }
+
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         const API_URL = 'http://localhost:3000/api/contact';
