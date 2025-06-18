@@ -42,10 +42,9 @@
                     <h2>Entre em Contato</h2>
                     <p>Tem alguma sugestão, dúvida ou quer apenas dizer um "oi"? Eu adoraria ouvir seu feedback!</p>
                 </div>
-                
                 <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:pedro.ricardo@unijui.edu.br">pedro.ricardo@unijui.edu.br</a></p>
-                    
+                    <p><i class="fas fa-envelope"></i> <a
+                            href="mailto:pedro.ricardo@unijui.edu.br">pedro.ricardo@unijui.edu.br</a></p>
                     <div class="social-media-contato">
                         <a href="https://github.com/Ricardo-Donato" target="_blank" title="GitHub"><i
                                 class="fab fa-github"></i></a>
@@ -55,23 +54,14 @@
                                 class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-
-                <!-- 
-                    FORMULÁRIO CONFIGURADO PARA O FORMSPREE
-                    1. Crie uma conta gratuita em https://formspree.io/
-                    2. Crie um novo formulário e copie sua URL única.
-                    3. Cole a URL no atributo "action" abaixo.
-                -->
-                <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST" autocomplete="off">
+                <form id="contact-form" class="contact-form">
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" name="name" placeholder="Seu nome" required>
-
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" placeholder="Seu e-mail para contato" required>
-
                     <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" name="message" rows="5" placeholder="Digite sua mensagem aqui..." required></textarea>
-
+                    <textarea id="mensagem" name="message" rows="5" placeholder="Digite sua mensagem aqui..."
+                        required></textarea>
                     <button type="submit">Enviar Mensagem</button>
                 </form>
             </div>
