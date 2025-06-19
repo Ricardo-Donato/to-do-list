@@ -1,19 +1,20 @@
-import express, { json, static as expressStatic } from 'express';
-import cors from 'cors';
-import { readFile, writeFile } from 'fs/promises'; // Usamos a versão de 'promises' do fs
-import { join } from 'path';
+const express = require('express');
+const cors = require('cors');
+const { readFile, writeFile } = require('fs/promises');
+const path = require('path');
+
 const app = express();
 const PORT = 3000;
 
 app.use(cors()); // Permite que o frontend acesse o backend
-app.use(json()); // Permite que o servidor entenda JSON
-app.use(expressStatic(join(__dirname, '../public'))); //serve arquivos estáticos do diretório 'public'
+app.use(express.json()); // Permite que o servidor entenda JSON
+app.use(express.static(path.join(__dirname, '../public'))); //serve arquivos estáticos do diretório 'public'
 
 // Define o caminho para o arquivo de tarefas
-const TASKS_PATH = join(__dirname, 'tarefas.json');
+const TASKS_PATH = path.join(__dirname, 'tarefas.json');
 
 // Caminho para o arquivo de mensagens de contato
-const MESSAGES_PATH = join(__dirname, 'mensagens.json');
+const MESSAGES_PATH = path.join(__dirname, 'mensagens.json');
 
 // --- Funções Auxiliares ---
 const readTasks = async () => {
