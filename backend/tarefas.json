@@ -7,7 +7,7 @@
   {
     "id": 11,
     "tarefa": "Conversar com o professor acerca da implementação de uma LLM",
-    "concluida": false
+    "concluida": true
   },
   {
     "id": 12,
